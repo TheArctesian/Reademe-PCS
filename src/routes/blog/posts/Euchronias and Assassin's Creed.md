@@ -1,5 +1,5 @@
 ---
-title: Assassin's Creed: Rewriting History Through Euchronia
+title: Assassin's Creed, Rewriting History Through Euchronia
 description: An analysis of how the Assassin's Creed franchise has evolved from historical fiction to euchronic reimagining, blending factual settings with mythological elements and technological anachronisms to create compelling but historically distorted narratives.
 author: Stephen Okita
 date: "2025-04-20"
