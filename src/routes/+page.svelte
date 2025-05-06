@@ -79,6 +79,8 @@
 </script>
 
 <div out:slide>
+
+  </div>
   <section>
     <div class="posts m-4">
       {#each data.posts as post, i}
