@@ -97,9 +97,9 @@
     </div>
 
     <p class="intro-text">
-      Welcome to our digital magazine collection. Browse through our curated
-      articles below. Each card represents a unique perspective on technology,
-      society, and culture.
+      <a href="https://pcs.studentorg.berkeley.edu/"
+        >Political Computer Science
+      </a> - Readme.md
     </p>
   </section>
 
