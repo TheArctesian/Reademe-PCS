@@ -8,7 +8,7 @@ categories:
   - Political Philosophy
   - Economic Theory
   - Critical Theory
-published: true
+published: false
 ---
 
 Collapse theory and accelerationism stand at the center of contemporary critique, revealing how the foundations of liberal political systems have created a self-consuming cycle where the snake devours its own tail.
