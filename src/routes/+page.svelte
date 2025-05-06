@@ -6,11 +6,6 @@
 
   // Use Svelte's reactive statements to track DOM updates
   let mounted = false;
-  let pdfPreviewVisible = false;
-
-  function togglePdfPreview() {
-    pdfPreviewVisible = !pdfPreviewVisible;
-  }
 
   // Track mouse position for hover effects
   function handleMouseMove(event, element) {
@@ -88,80 +83,19 @@
 
 <div out:slide>
   <section class="header-section">
-    <h1>Readme.md</h1>
-    <div class="pdf-section">
-      <div class="pdf-container">
-        <div class="pdf-header">
-          <div class="pdf-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-              ></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          </div>
-          <span class="pdf-name">Reading_demo_pdf.pdf</span>
-          <div class="pdf-actions">
-            <button class="preview-button" on:click={togglePdfPreview}>
-              {pdfPreviewVisible ? "Hide Preview" : "Show Preview"}
-            </button>
-            <a
-              href="/other/Reading_demo_pdf.pdf"
-              target="_blank"
-              class="download-button"
-            >
-              Open PDF
-            </a>
-          </div>
+    <div class="magazine-cover">
+      <a href="/other/readme_v1.pdf" target="_blank" class="cover-link">
+        <img
+          src="/images/readmecover.png"
+          alt="Readme: Volume 1: State of Information"
+          class="cover-image"
+        />
+        <div class="cover-overlay">
+          <span class="cover-text">Click to open PDF</span>
         </div>
-
-        {#if pdfPreviewVisible}
-          <div class="pdf-preview" transition:fade={{ duration: 200 }}>
-            <div class="pdf-preview-inner">
-              <!-- PDF Preview - Using a mock image to represent the preview -->
-              <div class="pdf-page">
-                <div class="pdf-mockup">
-                  <div class="pdf-title">The Reading Room</div>
-                  <div class="pdf-subtitle">
-                    A Collection of Essays & Articles
-                  </div>
-                  <div class="pdf-sample-text">
-                    <div class="pdf-line"></div>
-                    <div class="pdf-line pdf-line-short"></div>
-                    <div class="pdf-line"></div>
-                    <div class="pdf-line pdf-line-medium"></div>
-                    <div class="pdf-line"></div>
-                  </div>
-                  <div class="pdf-sample-section">
-                    <div class="pdf-section-title"></div>
-                    <div class="pdf-line"></div>
-                    <div class="pdf-line"></div>
-                    <div class="pdf-line pdf-line-short"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="pdf-preview-caption">
-                This is a preview of the first page. Click "Open PDF" to view
-                the full document.
-              </div>
-            </div>
-          </div>
-        {/if}
-      </div>
+      </a>
     </div>
+
     <p class="intro-text">
       Welcome to our digital magazine collection. Browse through our curated
       articles below. Each card represents a unique perspective on technology,
@@ -220,7 +154,10 @@
 
   /* Header section */
   .header-section {
-    margin: 3rem 3rem 2rem;
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   h1 {
@@ -228,164 +165,71 @@
     margin-bottom: 1.5rem;
     font-weight: 700;
     color: #333;
+    align-self: flex-start;
   }
 
-  /* PDF Section */
-  .pdf-section {
-    margin: 1.5rem 0;
-  }
-
-  .pdf-container {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+  /* Magazine Cover */
+  .magazine-cover {
+    position: relative;
+    max-width: 300px;
+    margin: 1rem 0 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    border-radius: 4px;
     overflow: hidden;
   }
 
-  .pdf-header {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #e0e0e0;
+  .magazine-cover:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   }
 
-  .pdf-icon {
-    margin-right: 10px;
-    color: #e53935;
-    flex-shrink: 0;
-  }
-
-  .pdf-name {
-    font-weight: 500;
-    color: #333;
-    flex-grow: 1;
-  }
-
-  .pdf-actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  .preview-button,
-  .download-button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    cursor: pointer;
+  .cover-link {
+    display: block;
     text-decoration: none;
-    display: inline-flex;
+    color: inherit;
+  }
+
+  .cover-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  .preview-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    color: #333;
+  .magazine-cover:hover .cover-overlay {
+    opacity: 1;
   }
 
-  .preview-button:hover {
-    background-color: #e0e0e0;
-  }
-
-  .download-button {
-    background-color: #0366d6;
-    border: 1px solid #0366d6;
+  .cover-text {
     color: white;
-  }
-
-  .download-button:hover {
-    background-color: #0256b9;
-  }
-
-  /* PDF Preview */
-  .pdf-preview {
-    padding: 1rem;
-    background-color: #f9f9f9;
-  }
-
-  .pdf-preview-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pdf-page {
-    width: 100%;
-    max-width: 500px;
-    aspect-ratio: 0.7;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    padding: 2rem;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .pdf-mockup {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .pdf-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-
-  .pdf-subtitle {
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #666;
-  }
-
-  .pdf-sample-text {
-    margin-bottom: 2rem;
-  }
-
-  .pdf-line {
-    height: 10px;
-    background-color: #f0f0f0;
-    margin-bottom: 10px;
-    border-radius: 2px;
-  }
-
-  .pdf-line-short {
-    width: 70%;
-  }
-
-  .pdf-line-medium {
-    width: 85%;
-  }
-
-  .pdf-sample-section {
-    margin-top: auto;
-  }
-
-  .pdf-section-title {
-    height: 15px;
-    width: 40%;
-    background-color: #e0e0e0;
-    margin-bottom: 15px;
-    border-radius: 2px;
-  }
-
-  .pdf-preview-caption {
-    font-size: 0.85rem;
-    color: #666;
-    text-align: center;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 2px solid white;
+    border-radius: 4px;
   }
 
   .intro-text {
     font-size: 1.1rem;
     margin: 1.5rem 0;
     color: #444;
+    text-align: center;
+    max-width: 700px;
   }
 
   /* Section styling */
@@ -565,10 +409,6 @@
       margin-left: 1rem;
       margin-right: 1rem;
     }
-
-    .pdf-actions {
-      flex-direction: column;
-    }
   }
 
   @media (max-width: 600px) {
@@ -585,17 +425,8 @@
       margin-right: 0.5rem;
     }
 
-    .pdf-header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .pdf-name {
-      margin-bottom: 0.5rem;
-    }
-
-    .pdf-actions {
-      width: 100%;
+    .magazine-cover {
+      max-width: 240px;
     }
   }
 </style>
